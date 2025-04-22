@@ -28,7 +28,7 @@ nodemon api
 
 ## 📦 Features
 
-- Add a link with a name (like: `Google,https://google.com`)
+- Add a link with a name (like: `Google, https://google.com`)
 - List all saved links
 - Delete any link with a click
 - Data is saved in a simple `urls.json` file
