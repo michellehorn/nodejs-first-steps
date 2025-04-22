@@ -1,47 +1,61 @@
-const ul = document.querySelector("ul")
-const input = document.querySelector("input")
-const form = document.querySelector('form')
+const ul = document.querySelector('ul');
+const input = document.querySelector('input');
+const form = document.querySelector('form');
 
+async function load() {
+  const res = await fetch(`http://localhost:3000/`).then((data) => data.json());
+  ul.innerHTML = '';
 
-function addElement({ name, url }) {
-    const li = document.createElement('li')
-    const a = document.createElement("a")
-    const trash = document.createElement("span")
-
-    a.href = url
-    a.innerHTML = name
-    a.target = "_blank"
-
-    trash.innerHTML = "x"
-    trash.onclick = () => removeElement(trash)
-
-    li.append(a)
-    li.append(trash)
-    ul.append(li)
+  res.urls.forEach((el) => {
+    renderElement(el);
+  });
 }
 
-function removeElement(el) {
-    if (confirm('Tem certeza que deseja deletar?'))
-        el.parentNode.remove()
+load();
+
+function renderElement({ name, url }) {
+  const li = document.createElement('li');
+  const a = document.createElement('a');
+  const trash = document.createElement('span');
+
+  a.href = url;
+  a.innerHTML = name;
+  a.target = '_blank';
+
+  trash.innerHTML = 'x';
+  trash.onclick = () => removeElement({ name, url });
+
+  li.append(a);
+  li.append(trash);
+  ul.append(li);
 }
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
+async function removeElement(item) {
+  if (confirm('Tem certeza que deseja deletar?')) {
+    await fetch(`http://localhost:3000?name=${item.name}&url=${item.url}&del=1`);
+    await load();
+  }
+}
 
-    let { value } = input
+async function addElement(item) {
+  await fetch(`http://localhost:3000?name=${item.name}&url=${item.url}`);
+  await load();
+}
 
-    if (!value)
-        return alert('Preencha o campo')
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
 
-    const [name, url] = value.split(",")
+  let { value } = input;
 
-    if (!url)
-        return alert('formate o texto da maneira correta')
+  if (!value) return alert('Preencha o campo');
 
-    if (!/^http/.test(url))
-        return alert("Digite a url da maneira correta")
+  const [name, url] = value.split(',');
 
-    addElement({ name, url })
+  if (!url) return alert('formate o texto da maneira correta');
 
-    input.value = ""
-})
+  if (!/^http/.test(url)) return alert('Digite a url da maneira correta');
+
+  addElement({ name, url });
+
+  input.value = '';
+});
