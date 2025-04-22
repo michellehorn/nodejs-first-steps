@@ -1,7 +1,7 @@
 # 🌐 Mini URL Saver
 
 A tiny project to save and manage your favorite links!
-Built with **Node.js**, some **vanilla JavaScript** and a bit of 💖.
+Built with **Node.js**, some **JavaScript** and a bit of 💖.
 
 ---
 
@@ -38,7 +38,6 @@ nodemon api
 ## 🛠 Tech Stack
 
 - Node.js
-- Express (kind of)
 - HTML, CSS, JavaScript
 - No database, just good ol’ JSON
 
