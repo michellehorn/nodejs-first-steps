@@ -49,11 +49,12 @@ form.addEventListener('submit', (event) => {
 
   if (!value) return alert('Preencha o campo');
 
-  const [name, url] = value.split(',');
+  let [name, url] = value.split(',');
+  url = url.trim();
 
   if (!url) return alert('formate o texto da maneira correta');
 
-  if (!/^http/.test(url)) return alert('Digite a url da maneira correta');
+  if (!/^http/.test(url) || !/^https/.test(url)) return alert('Digite a url da maneira correta');
 
   addElement({ name, url });
 

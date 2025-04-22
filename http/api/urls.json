@@ -11,6 +11,14 @@
     {
       "name": "Discord",
       "url": "http://discord.com"
+    },
+    {
+      "name": "Globo",
+      "url": "http://globo.com"
+    },
+    {
+      "name": "Apple",
+      "url": "https://apple.com"
     }
   ]
 }
